@@ -30,8 +30,12 @@ def get_all_people():
     all_characters = list(map(lambda x: x.serialize(), character_query))
     return jsonify(all_characters)
 
+
+
+
 # GET PUT AND DELETE ONE CHARACTER
 @api.route('/people/<int:character_id>', methods=['GET' , 'PUT' ,'DELETE'])
+@jwt_required()
 def get_one_character(character_id):  
 
     body = request.get_json() #{ 'character_name': 'new_charactername'}
@@ -68,8 +72,8 @@ def get_one_character(character_id):
 
 
 # CREATE NEW CHARACTER
-@api.route('/character', methods=['POST'])
-
+@api.route('/people', methods=['POST'])
+@jwt_required()
 def create_character():
     body = request.get_json()
     character1 = Character(character_name= body["character_name"],
@@ -88,7 +92,8 @@ def create_character():
 
 
 # GET ALL PLANETS
-@api.route('/planet', methods=['GET'])
+@api.route('/planets', methods=['GET'])
+@jwt_required()
 def get_all_planets():
 
     planet_query = Planet.query.all()
@@ -97,7 +102,8 @@ def get_all_planets():
 
 
 # CREATE NEW PLANET
-@api.route('/planet', methods=['POST'])
+@api.route('/planets', methods=['POST'])
+@jwt_required()
 def create_planet():
     body = request.get_json()
     planet1 = Planet(planet_name= body["planet_name"],
@@ -110,7 +116,8 @@ def create_planet():
 
 
 # GET  PUT AND DELETE ONE PLANET
-@api.route('/planet/<int:planet_id>', methods=['GET' , 'PUT' ,'DELETE'])
+@api.route('/planets/<int:planet_id>', methods=['GET' , 'PUT' ,'DELETE'])
+@jwt_required()
 def get_one_planet(planet_id):  
 
     body = request.get_json()
@@ -153,6 +160,7 @@ def get_one_planet(planet_id):
 
 # GET USERS
 @api.route('/users', methods=['GET'])
+@jwt_required()
 def get_all_users():
 
     users_query = User.query.all()
@@ -162,6 +170,7 @@ def get_all_users():
 
 # GET ALL FAVORITE CHARACTERS OF A USER
 @api.route('/users/favorites/', methods=['GET'])
+@jwt_required()
 def all_favorite_character():
     favorite_character_query = Character_favorites.query.all()
     all_characters_favorites = list(map(lambda x: x.serialize(), favorite_character_query))
@@ -172,6 +181,7 @@ def all_favorite_character():
 
 # ADD FAVORITE CHARACTER
 @api.route('/users/favorites/<int:id>', methods=['POST'])
+@jwt_required()
 def add_favorite_character(id):
 
     # favorite_character = Character_favorites(character_id= id,user_id = ?????)
@@ -199,7 +209,7 @@ def create_token():
     
     # create a new token with the user id inside
     access_token = create_access_token(identity=user.id)
-    return jsonify({ "token": access_token, "user_id": user.id })
+    return jsonify({ "token": access_token, "user_id": user.id }),200
 
     
 

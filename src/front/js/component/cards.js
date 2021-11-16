@@ -8,7 +8,7 @@ export const Card = props => {
 	const { actions, store } = useContext(Context);
 
 	useEffect(() => {
-		store.isLoggedIn ? actions.loadData(`${props.type_info}`) : "";
+		store.token ? actions.loadData(`${props.type_info}`) : "";
 	}, []);
 
 	return (

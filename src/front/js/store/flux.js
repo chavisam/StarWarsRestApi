@@ -36,7 +36,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			//we use the starwars API
 			loadData: type_info => {
-				fetch(`https://www.swapi.tech/api/${type_info}`)
+				const store = getStore();
+				const options = {
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer " + store.token
+					}
+				};
+
+				fetch(`https://www.swapi.tech/api/${type_info}`, options)
+					//fetch(process.env.BACKEND_URL + `/${type_info}`, options)
 					.then(response => {
 						//console.log(response.ok);
 						console.log(response.status);
@@ -92,7 +101,14 @@ const getState = ({ getStore, getActions, setStore }) => {
 			//FUNCTION TO FETCH A CHARACTER DATA
 			getCharacterData: (id, type) => {
 				setStore({ characterData: {} });
-				fetch(`https://www.swapi.tech/api/${type}/${id}`)
+
+				const options = {
+					headers: {
+						"Content-Type": "application/json",
+						Authorization: "Bearer" + store.token
+					}
+				};
+				fetch(`https://www.swapi.tech/api/${type}/${id}`, options)
 					.then(response => {
 						console.log(response.status);
 						return response.json();
