@@ -1,0 +1,61 @@
+body{
+    background-image: url(./../img/fondostarwars.jpg);
+    background-repeat: no-repeat;
+    background-size:cover;
+    background-position:center;
+    background-attachment: fixed;
+}
+
+
+
+#logo{
+    width: 100px;
+    padding: 5px;
+}
+
+.characters{
+    width: 300px;
+}
+
+.scroll {    
+    display: flex; 
+    flex-wrap: nowrap;
+    height: 600px;
+    overflow-y:hidden;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.card{
+
+    width: 320px;
+    height: 500px;
+    margin-right: 30px; 
+    display: inline-block;
+    flex:0 0 auto;
+    background-color: transparent;
+ 
+}
+
+p{
+    color:rgb(238, 228, 94)
+}
+
+.more{
+    width: 150px;
+    margin-left: 20px;
+}
+
+footer {
+
+    padding: 10px;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 100;
+    z-index: 1030;
+}
+
+.less{
+    height: 500px;
+}
