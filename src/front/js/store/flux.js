@@ -100,12 +100,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			//FUNCTION TO FETCH A CHARACTER DATA
 			getCharacterData: (id, type) => {
+				const store = getStore();
 				setStore({ characterData: {} });
 
 				const options = {
 					headers: {
 						"Content-Type": "application/json",
-						Authorization: "Bearer" + store.token
+						Authorization: "Bearer " + store.token
 					}
 				};
 				fetch(`https://www.swapi.tech/api/${type}/${id}`, options)

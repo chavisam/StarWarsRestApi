@@ -9,7 +9,7 @@ export const Info = () => {
 	const pref = store.characterData.result;
 	return (
 		<div>
-			{store.isLoggedIn ? (
+			{store.token ? (
 				store.characterData.message == "ok" ? (
 					<div className="container-fluid">
 						<div className="row">
